@@ -10,6 +10,7 @@ const isTherePath = (pathGiven) => {
 module.exports = {
     isTherePath
 }
+//
 
 
 // var fs = require('fs');

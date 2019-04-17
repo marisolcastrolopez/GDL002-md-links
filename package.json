@@ -12,5 +12,8 @@
   },
   "dependencies": {
     "eslint-plugin-jest": "^22.4.1"
+  },
+  "bin": {
+    "md-links": "bin/cli.js"
   }
 }

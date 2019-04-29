@@ -7,6 +7,7 @@ const isTherePath = (pathGiven) => {
     };
 }
 
+
 module.exports = {
     isTherePath
 }

@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const isTherePath = (pathGiven) => {
     if (pathGiven) {
         return true;
@@ -8,9 +10,45 @@ const isTherePath = (pathGiven) => {
 }
 
 
-module.exports = {
-    isTherePath
+const fileExist = (file) => {
+    fs.access(file, fs.constants.F_OK, (err) => {
+        console.log(`${file} ${err ? 'does not exist' : 'exists'}`);
+    });
 }
+
+
+
+
+
+module.exports = {
+    isTherePath,
+    fileExist
+}
+
+// const isItAdirectory = (pathGiven) => {
+//     if (fs.existsSync(pathGiven)) {
+//         console.log('It exists');
+//         return true;
+//     }
+//     else {
+//         console.log('It doesnt exist');
+//         return false;
+//     }
+// }
+
+// function existsSync(path) {
+//     try {
+//         path = toPathIfFileURL(path);
+//         validatePath(path);
+//     } 
+//     catch {
+//         return false;
+//     }
+//     const ctx = { path };
+//     binding.access(pathModule.toNamespacedPath(path), F_OK, undefined, ctx);
+//     return ctx.errno === undefined;
+// }
+
 //
 
 
@@ -95,7 +133,7 @@ module.exports = {
 //     if(err){console.log(err); return err}
 //     for(let i = 0; i< dataJS.length; i++){
 //         console.log(dataJS[i])
-        
+
 //     }
 // }
 

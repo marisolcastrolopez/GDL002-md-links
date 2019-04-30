@@ -3,30 +3,38 @@ const fs = require('fs');
 //joining path of directory 
 const directoryPath = path.join(__dirname, '');
 //passsing directoryPath and callback function
-const tryThis = (directoryPath) => { fs.readdir(directoryPath, function (err, files) {
-    //handling error
-    if (err) {
-        console.log('Unable to scan directory: ' + err);
-        return err;
-        
-    } 
-    //listing all files using forEach
-    files.forEach(function (file) {
-        // Do whatever you want to do with the file
-        console.log(file); 
+const tryThis = (directoryPath) => {
+    return new Promise((resolve, reject) => {
+        fs.readdir(directoryPath, function (err, files) {
+            //handling error
+            if (err) {
+                // console.log('Unable to scan directory: ' + err);
+                reject(err);
+                return;
+            }
+
+            else {resolve(files.forEach(function (file) {
+                // Do whatever you want to do with the file
+                console.log(file);
+            }));
+        }
+            // listing all files using forEach
+
+        });
     });
-});
+
 }
-tryThis(directoryPath);
+
 
 module.exports = {
-       tryThis
-    }
+    tryThis
+}
+console.log(tryThis(directoryPath));
 
 // const fs = require('fs');
 
 // const mdLinks = (path,options) => {
-    
+
 // }
 
 // const isTherePath = (pathGiven) => {

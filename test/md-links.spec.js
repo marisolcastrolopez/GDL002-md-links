@@ -1,14 +1,15 @@
-const path = require('path');
 const fs = require('fs');
+const path = require('path');
+
 // const mdLinks = require('../src/md-links.js')
 const { tryThis } = require('../src/md-links.js')
-console.log(tryThis)
+// console.log(tryThis)
 
-const pathGiven = 'foo';
-const pathInexistent = 'foo';
+// const pathGiven = 'foo';
+// const pathInexistent = 'foo';
 const directoryPath = path.join(__dirname, '');
-const fileExistent = tryThis(pathInexistent)
-const pathExistent = 'C:\\Users\\solca\\Documents\\Laboratoria\\mdlinks\\GDL002-md-links\\test-md-files'
+// const fileExistent = tryThis(pathInexistent)
+// const pathExistent = 'C:\\Users\\solca\\Documents\\Laboratoria\\mdlinks\\GDL002-md-links\\test-md-files'
 
 // //Is there a path?
 // describe('isTherePath', () => {
@@ -34,15 +35,28 @@ describe("Should read a directory",  () => {
     expect(typeof (tryThis)).toBe('function')
   });
 
-  it('Debería retornar error ENOENT', async()  => {
-    await expect(tryThis(directoryPath)).rejects.toEqual('ENOENT');
+  // it('Debería retornar error ENOENT', async()  => {
+  //   await expect(tryThis(directoryPath)).rejects.toEqual('ENOENT');
+  // });
+
+  it('Debería retornar error ENOENT', ()  => {
+    tryThis(directoryPath).catch(error => {
+      expect(error).contains('ENOENT');
+    })
   });
 
-  it('the data is peanut butter', () => {
-    return new Promise (tryThis(directoryPath)).then(data => {
-      expect(data).toEqual('ENOENT');
-    });
-  });
+  // it('the data is peanut butter', () => {
+  //   return new Promise (tryThis(directoryPath)).then(data => {
+  //     expect(data).toEqual('ENOENT');
+  //   });
+  // });
+
+  // it('tryThis should return an error', () => {
+
+	// 	tryThis(directoryPath, function(result){
+	// 		expect(result).toBe('Hi');
+	// 	});
+	// });
 });
 
 

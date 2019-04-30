@@ -1,29 +1,72 @@
+const path = require('path');
 const fs = require('fs');
-
-const isTherePath = (pathGiven) => {
-    if (pathGiven) {
-        return true;
-    } else {
-        console.log('Hint: Write a Path eg: documents/readme.md');
-        return false;
-    };
-}
-
-
-const fileExist = (file) => {
-    fs.access(file, fs.constants.F_OK, (err) => {
-        console.log(`${file} ${err ? 'does not exist' : 'exists'}`);
+//joining path of directory 
+const directoryPath = path.join(__dirname, '');
+//passsing directoryPath and callback function
+const tryThis = (directoryPath) => { fs.readdir(directoryPath, function (err, files) {
+    //handling error
+    if (err) {
+        console.log('Unable to scan directory: ' + err);
+        return err;
+        
+    } 
+    //listing all files using forEach
+    files.forEach(function (file) {
+        // Do whatever you want to do with the file
+        console.log(file); 
     });
+});
 }
-
-
-
-
+tryThis(directoryPath);
 
 module.exports = {
-    isTherePath,
-    fileExist
-}
+       tryThis
+    }
+
+// const fs = require('fs');
+
+// const mdLinks = (path,options) => {
+    
+// }
+
+// const isTherePath = (pathGiven) => {
+//     if (pathGiven) {
+//         return true;
+//     } else {
+//         console.log('Hint: Write a Path eg: documents/readme.md');
+//         return false;
+//     };
+// }
+
+// const pathExist = (pathToTest) => {
+// fs.stat(pathToTest, function(err) {
+//     if (!err) {
+//         console.log('file or directory exists');
+//     }
+//     else if (err.code === 'ENOENT') {
+//         console.log('file or directory does not exist');
+//     }
+// });
+// }
+
+// //requiring path and fs modules
+
+
+// // const fileExist = (file) => {
+// //     fs.access(file, fs.constants.F_OK, (err) => {
+// //         console.log(`${file} ${err ? 'does not exist' : 'exists'}`);
+// //     });
+// // }
+
+
+
+
+
+// module.exports = {
+//     mdLinks,
+//     isTherePath,
+//     pathExist
+// }
 
 // const isItAdirectory = (pathGiven) => {
 //     if (fs.existsSync(pathGiven)) {

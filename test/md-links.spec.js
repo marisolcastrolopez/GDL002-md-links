@@ -1,36 +1,51 @@
+const path = require('path');
 const fs = require('fs');
-const mdLinks = require('../src/md-links.js')
-const pathGiven = 'foo\\bar';
-const pathInexistent = 'foo\\bar';
-const fileExist = mdLinks.fileExist(pathInexistent)
+// const mdLinks = require('../src/md-links.js')
+const { tryThis } = require('../src/md-links.js')
+console.log(tryThis)
+
+const pathGiven = 'foo';
+const pathInexistent = 'foo';
+const directoryPath = path.join(__dirname, '');
+const fileExistent = tryThis(pathInexistent)
 const pathExistent = 'C:\\Users\\solca\\Documents\\Laboratoria\\mdlinks\\GDL002-md-links\\test-md-files'
 
-//Is there a path?
-describe('isTherePath', () => {
+// //Is there a path?
+// describe('isTherePath', () => {
+//   it('it should be an function', () => {
+//     expect(typeof (mdLinks.isTherePath)).toBe('function');
+//   });
+
+//   it('isTherePath should return OK statement if there\'s a path', () => {
+//     expect(mdLinks.isTherePath(pathGiven)).toEqual(
+//       true
+//     );
+//   });
+
+//   it('isTherePath should return an ERROR statement if theres not a path', () => {
+//     expect(mdLinks.isTherePath()).toEqual(
+//       false
+//     );
+//   });
+// });
+
+describe("Should read a directory",  () => {
   it('it should be an function', () => {
-    expect(typeof (mdLinks.isTherePath)).toBe('function');
+    expect(typeof (tryThis)).toBe('function')
   });
 
-  it('isTherePath should return OK statement if there\'s a path', () => {
-    expect(mdLinks.isTherePath(pathGiven)).toEqual(
-      true
-    );
+  it('Debería retornar error ENOENT', async()  => {
+    await expect(tryThis(directoryPath)).rejects.toEqual('ENOENT');
   });
 
-  it('isTherePath should return an ERROR statement if theres not a path', () => {
-    expect(mdLinks.isTherePath()).toEqual(
-      false
-    );
-  });
-});
-
-describe("Should read a directory", () =>{
-  test ("should read a directory",() => {
-    mdLinks.fileExist('foo\\bar').then((result) => {
-      expect(result).toEqual("foo\\bar does not exist");
+  it('the data is peanut butter', () => {
+    return new Promise (tryThis(directoryPath)).then(data => {
+      expect(data).toEqual('ENOENT');
     });
   });
 });
+
+
 
 // describe("Should read a directory", () =>{
 //   test ("should read a directory",() => {

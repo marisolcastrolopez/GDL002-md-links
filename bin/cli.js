@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+'use strict';
 const chalk = require('chalk');
 //Grab provided args
 const mdLinks = require('../src/md-links.js')

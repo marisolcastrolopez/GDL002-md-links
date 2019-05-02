@@ -1,3 +1,4 @@
+// jest.config.js
 module.exports = {
-    setupTestFrameworkScriptFile: './jest.setup.js'
-  }
+    verbose: true,
+  };

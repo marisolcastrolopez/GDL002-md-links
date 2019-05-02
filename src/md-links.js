@@ -1,6 +1,9 @@
 const path = require('path');
 const fs = require('fs');
+const fetch = require('node-fetch');
+const chalk = require('chalk');
 
+let linksArray = []
 //Check if the user write a path
 const isThereAPath = (pathGiven) => {
     if (pathGiven) {
@@ -19,18 +22,24 @@ const checkFileDirectory = (directoryPath) => {
             //handling error
             if (err) {
                 console.error(
-                    `${directoryPath} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
+                `${directoryPath} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
                 reject(err);
                 return;
             }
             else {
-                console.log(`${directoryPath} exists, and it is writable`);
-                resolve(true)
+                let pathFile = path.join(__dirname, directoryPath);
+                console.log(chalk.blue(`${directoryPath} exists, and it is writable`));
+                console.log(goodPath);
+                resolve(true);
+                return pathFile;
             }
         });
     });
 }
 
+
+
+let regexUrlCheck = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm
 module.exports = {
     isThereAPath,
     checkFileDirectory

@@ -1,11 +1,15 @@
 #!/usr/bin/env node
-'use strict';
+
+//Library used to color statements in CLI
 const chalk = require('chalk');
-//Grab provided args
-const mdLinks = require('../src/md-links.js')
-const [,, ... args] = process.argv
+//Our external JS file with our functions
+const mdLinks = require('../src/md-links.js');
+//Provided args in CLI
+const pathGiven = process.argv[2];
+
+
+mdLinks.checkFileDirectory(pathGiven);
 
 //Print hello provided argvs
-console.log(chalk.blue(`Hello ${args}`))
-
+// console.log(`${chalk.blue(mdLinks.checkFileDirectory(pathGiven))}`);
 

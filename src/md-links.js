@@ -2,15 +2,16 @@ const path = require('path');
 const fs = require('fs');
 const fetch = require('node-fetch');
 const chalk = require('chalk');
+var markdownLinkExtractor = require('markdown-link-extractor');
 
-let linksArray = []
+
 //Check if the user write a path
 const isThereAPath = (pathGiven) => {
     if (pathGiven) {
-        console.log('You enter a path successfully');
+        console.log(chalk.green('✔ You enter a path successfully'));
         return true;
-    } else {
-        console.log('Hint: Write a file to scan eg: yourFileName.md');
+    } else if (pathGiven === undefined) {
+        console.log(chalk.red('✖ Hint: Write a file to scan eg: yourFileName.md'));
         return false;
     };
 }
@@ -21,28 +22,43 @@ const checkFileDirectory = (directoryPath) => {
         fs.access(directoryPath, fs.constants.F_OK | fs.constants.W_OK, (err) => {
             //handling error
             if (err) {
-                console.error(
-                `${directoryPath} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`);
+                console.error(chalk.red(
+                    `✖ ${directoryPath} ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}`));
                 reject(err);
                 return;
             }
             else {
-                let pathFile = path.join(__dirname, directoryPath);
-                console.log(chalk.blue(`${directoryPath} exists, and it is writable`));
-                console.log(goodPath);
+                console.log(chalk.green(`✔ ${directoryPath} exists, and it is writable`));
+                console.log(directoryPath);
                 resolve(true);
-                return pathFile;
+                return directoryPath;
             }
         });
     });
 }
 
+const getLinks = (directoryPath) => {
+    fs.readFile(directoryPath.toString(), 'utf8', (err, data) => {
+        if (err) {
+            throw err;
+        }
+        else {
+            var links = markdownLinkExtractor(data);
+            links.forEach(function (link) {
+                console.log(link);
+            });
+        }
+
+    });
+};
 
 
-let regexUrlCheck = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm
+
+
 module.exports = {
     isThereAPath,
-    checkFileDirectory
+    checkFileDirectory,
+    getLinks
 }
 
 //Check if the function works

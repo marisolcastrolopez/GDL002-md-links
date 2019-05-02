@@ -47,27 +47,21 @@ const getLinks = (directoryPath) => {
             // console.log(typeof links);
             links.forEach(function (link) {
                 function checkStatus(res) {
+                    counter = 0;
                     if (res.ok) { // res.status >= 200 && res.status < 300
-                        
-                        return console.log(chalk.green(`✔ `, res.statusText), res.status, link);
+                        return console.log(chalk.green(`✔ `, res.statusText), res.status, link, ++counter, ' link');
                     } else {
                         // console.log('Hubo un problema con la petición en este link: ', res.statusText, link);
-                        throw MyCustomError('This link is broken: ', res.statusText, link, res.status);  
+                        throw MyCustomError('This link is broken: ', res.statusText, link, res.status);
                     }
-                } 
+                }
                 fetch(link)
                     .then(checkStatus)
-                    .catch(res => console.log(chalk.red(`✖ `),'This link is broken: ', chalk.red(link)))
+                    .catch(res => console.log(chalk.red(`✖ `), 'This link is broken: ', chalk.red(link)))
             });
-           
-            
         }
-
     });
 };
-
-
-
 
 module.exports = {
     isThereAPath,

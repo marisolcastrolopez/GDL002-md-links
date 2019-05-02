@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-'use strict';
+
 //Library used to color statements in CLI
 const path = require('path');
 const chalk = require('chalk');
@@ -12,8 +12,3 @@ const pathGiven = process.argv[2];
 mdLinks.isThereAPath(pathGiven);
 mdLinks.checkFileDirectory(pathGiven);
 mdLinks.getLinks(pathGiven);
-
-
-// console.log(process.argv)
-// console.log(`${chalk.blue(mdLinks.checkFileDirectory(pathGiven))}`);
-

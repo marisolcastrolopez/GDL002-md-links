@@ -44,8 +44,13 @@ const getLinks = (directoryPath) => {
         }
         else {
             var links = markdownLinkExtractor(data);
+            // console.log(typeof links);
             links.forEach(function (link) {
-                console.log(link);
+                fetch(link)
+                    .then(res => {
+                        console.log(chalk.green(`✔ `,res.statusText) , res.status, link);
+                    });
+                
             });
         }
 

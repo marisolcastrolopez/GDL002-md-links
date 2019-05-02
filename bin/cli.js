@@ -13,6 +13,7 @@ mdLinks.isThereAPath(pathGiven);
 mdLinks.checkFileDirectory(pathGiven);
 mdLinks.getLinks(pathGiven);
 
+
 // console.log(process.argv)
 // console.log(`${chalk.blue(mdLinks.checkFileDirectory(pathGiven))}`);
 

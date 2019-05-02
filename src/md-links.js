@@ -46,16 +46,21 @@ const getLinks = (directoryPath) => {
             var links = markdownLinkExtractor(data);
             // console.log(typeof links);
             links.forEach(function (link) {
+                function checkStatus(res) {
+                    if (res.ok) { // res.status >= 200 && res.status < 300
+                        
+                        return console.log(chalk.green(`✔ `, res.statusText), res.status, link);
+                    } else {
+                        // console.log('Hubo un problema con la petición en este link: ', res.statusText, link);
+                        throw MyCustomError('This link is broken: ', res.statusText, link, res.status);  
+                    }
+                } 
                 fetch(link)
-                    .then(res => {
-                        console.log(chalk.green(`✔ `, res.statusText), res.status, link);
-
-                    }).catch(function (error) {
-                        console.log('Hubo un problema con la petición en este link: ', link);
-
-                    });
-
+                    .then(checkStatus)
+                    .catch(res => console.log(chalk.red(`✖ `),'This link is broken: ', chalk.red(link)))
             });
+           
+            
         }
 
     });

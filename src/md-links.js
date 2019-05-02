@@ -48,9 +48,13 @@ const getLinks = (directoryPath) => {
             links.forEach(function (link) {
                 fetch(link)
                     .then(res => {
-                        console.log(chalk.green(`✔ `,res.statusText) , res.status, link);
+                        console.log(chalk.green(`✔ `, res.statusText), res.status, link);
+
+                    }).catch(function (error) {
+                        console.log('Hubo un problema con la petición en este link: ', link);
+
                     });
-                
+
             });
         }
 
